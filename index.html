@@ -540,14 +540,12 @@
     }
 
     /* faq section styles */
-    .faq-section {
+    .faq-section{
       background-color: #e7f3fe;
-
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-
     }
 
     .faq-h2 {
@@ -561,62 +559,61 @@
     }
 
     .faq {
-      margin-bottom: 15px;
-      width: 100%;
-      /* Full width by default */
-      background-color: #fff;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      overflow: hidden;
+    margin-bottom: 15px;
+    width: 100%; /* Full width by default */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: background-color 0.3s ease;
+    }
+    .faq:hover {
+      background-color: #f0f8ff; /* Slight hover effect for FAQs */
     }
 
     .faq-question {
-      background-color: #e7ffe7;
-      color: #333;
-      padding: 10px;
-      width: 100%;
-      text-align: left;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: 600;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    background-color: #e7ffe7;
+    color: #333;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
     }
-
+    .faq-question:hover {
+      background-color: #d5f0d5; /* Lighter green on hover */
+    }
     .faq-question::after {
-      content: '';
-      display: inline-block;
-      width: 0;
-      height: 0;
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-      border-top: 8px solid #333;
-      /* Downward pointing wide "V" */
-      transition: transform 0.3s ease;
-
-      margin-right: 10px;
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #333; /* Downward pointing wide "V" */
+    transition: transform 0.4s ease;
+    margin-right: 10px;
     }
 
     .faq.active .faq-question::after {
-      border-top: none;
-      border-bottom: 8px solid #333;
-      /* Upward pointing wide "V" */
+    transform: rotate(180deg);
     }
 
     .faq-answer {
-      max-height: 0;
-      /* Initially hidden */
-      overflow: hidden;
-      /* Hide content when not visible */
-      padding: 0 10px;
-      background-color: #fff;
-      transition: max-height 0.3s ease;
-      /* Smooth transition */
-      border-top: 1px solid #ccc;
+    opacity: 0;
+    max-height: 0; /* Initially hidden */
+    overflow: hidden; /* Hide content when not visible */
+    padding: 0 10px;
+    background-color: #fff;
+    transition: max-height 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth transition */
+    border-top: 1px solid #ccc;
     }
 
     .faq-answer p {
@@ -624,10 +621,12 @@
     }
 
     .faq.active .faq-answer {
-      max-height: 200px;
-      /* Set to a sufficient height to display content */
-      padding: 10px;
-      /* Adds padding when expanded */
+    opacity: 1;
+    max-height: 500px; /* Set to a sufficient height to display content */
+    padding: 10px; /* Adds padding when expanded */
+   }
+   .faq.active .faq-answer p {
+      transition: opacity 0.3s ease-in-out;
     }
 
     /* Back to Top Button Styles */
@@ -1144,30 +1143,28 @@
   </script>
 
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const faqButtons = document.querySelectorAll('.faq-question');
+ <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const faqButtons = document.querySelectorAll('.faq-question');
 
-      faqButtons.forEach(button => {
-        button.addEventListener('click', function () {
-          const faq = button.parentElement;
-          const answer = faq.querySelector('.faq-answer');
+    faqButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const faq = button.parentElement;
+            const answer = faq.querySelector('.faq-answer');
 
-          // Toggle active class
-          faq.classList.toggle('active');
+            // Toggle active class
+            faq.classList.toggle('active');
 
-          // Control the max-height for slide effect
-          if (faq.classList.contains('active')) {
-            answer.style.maxHeight = answer.scrollHeight + 'px'; // Set the height based on content
-          } else {
-            answer.style.maxHeight = null; // Remove max-height to hide
-          }
+            // Control the max-height for slide effect
+            if (faq.classList.contains('active')) {
+                answer.style.maxHeight = answer.scrollHeight + 'px'; // Set height based on content
+            } else {
+                answer.style.maxHeight = '0'; // Set height to zero to collapse
+            }
         });
-      });
     });
-
-
-  </script>
+});
+</script>
 
   <script>
     //enabling the Dark mode toggle button added
